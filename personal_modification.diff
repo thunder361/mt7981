@@ -1,0 +1,27 @@
+diff --git a/target/linux/mediatek/image/mt7622.mk b/target/linux/mediatek/image/mt7622.mk
+index 7b909ca..d4dd131 100755
+--- a/target/linux/mediatek/image/mt7622.mk
++++ b/target/linux/mediatek/image/mt7622.mk
+@@ -258,7 +258,7 @@ define Device/xiaomi_redmi-router-ax6s
+    DEVICE_DTS := mt7622-xiaomi-redmi-router-ax6s
+    DEVICE_DTS_DIR := ../dts
+    BOARD_NAME := xiaomi,redmi-router-ax6s
+-   DEVICE_PACKAGES :=luci-app-mtwifi l1profile wireless-tools  kmod-mt7622 kmod-mt_wifi ipv6helper kmod-mediatek_hnat bash autocore-arm
++   DEVICE_PACKAGES :=luci-app-mtwifi l1profile wireless-tools kmod-mt_wifi ipv6helper kmod-mediatek_hnat bash autocore-arm kmod-mt7615-firmware kmod-mt7615e luci-app-guest-wifi htop openssh-sftp-server nano luci-theme-atmaterial luci-app-autoreboot luci-app-ddns luci-app-openclash luci-app-passwall mosdns luci-app-ttyd luci-app-upnp luci-app-wol ddns-scripts_dnspod bind-dig
+    UBINIZE_OPTS := -E 5
+    IMAGES += factory.bin
+    BLOCKSIZE := 128k
+diff --git a/target/linux/mediatek/mt7622/base-files/etc/init.d/bootcount b/target/linux/mediatek/mt7622/base-files/etc/init.d/bootcount
+index 1e39d0d..7b57876 100755
+--- a/target/linux/mediatek/mt7622/base-files/etc/init.d/bootcount
++++ b/target/linux/mediatek/mt7622/base-files/etc/init.d/bootcount
+@@ -9,9 +9,7 @@ boot() {
+ 	mtkwifi reload
+ 	echo "2" > "/proc/irq/20/smp_affinity"
+ 	echo "3" > "/sys/class/net/eth0/queues/rx-0/rps_cpus"
+-	echo "3" > "/sys/class/net/ra0/queues/rx-0/rps_cpus"
+ 	echo "3" > "/sys/class/net/rai0/queues/rx-0/rps_cpus"
+-	echo "3" > "/sys/class/net/apcli0/queues/rx-0/rps_cpus"
+ 	echo "3" > "/sys/class/net/apclii0/queues/rx-0/rps_cpus"
+ 	insmod /lib/modules/mtkhnat.ko
+ 	case $(board_name) in
