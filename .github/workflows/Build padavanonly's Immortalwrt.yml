@@ -1,4 +1,4 @@
-name: Build padavanonlyImmortalwrt
+name: Build padavanonly's Immortalwrt
 
 on:
   push:
@@ -32,9 +32,9 @@ jobs:
       run: |
         # git clone -b openwrt-18.06-k5.4 --single-branch --depth=1 https://github.com/padavanonly/immortalwrtmt7622 immortalwrt
         git clone -b openwrt-18.06-k5.4 --single-branch https://github.com/padavanonly/immortalwrtmt7622 immortalwrt
-        cp personal_modification.diff immortalwrt/personal_modification.diff
+        # cp personal_modification.diff immortalwrt/personal_modification.diff
         cd immortalwrt/
-        git apply personal_modification.diff
+        # git apply personal_modification.diff
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         cp ../padavanonly.config ./.config
